@@ -23,5 +23,5 @@ Software available at www.mat.univie.ac.at/~neum/software/snobfit
 
 __all__ = ['minimize', 'optset', 'log', 'snobfit']
 
-from ._snobfit import minimize, snobfit
+from ._snobfit import snobfit
 from ._optset import optset
