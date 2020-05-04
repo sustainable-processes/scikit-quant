@@ -81,7 +81,7 @@ or make them available to be passed in?
   fbest        current best function value (i.e. function value at xbest)
 """
 
-from SQCommon import Result, ObjectiveFunction
+#from SQCommon import Result, ObjectiveFunction
 from ._gen_utils import diag, max_, min_, find, extend, rand, sort
 from ._optset    import optset
 from ._snobinput import snobinput
@@ -99,7 +99,7 @@ import numpy
 
 __all__ = ['minimize', 'log']
 
-log = logging.getLogger('SKQ.SnobFit')
+#log = logging.getLogger('SKQ.SnobFit')
 
 
 # dummy save/load (can always pickle but seems superflous; deal with this
@@ -122,6 +122,7 @@ config - use dictionary
     bounds - multidimensional numpy array
     nreq - int
     probability p - float
+'''
 '''
 def snobfit_func(iter, x, func, config, dx, df):
     req = x
@@ -246,7 +247,7 @@ def minimize(f, x0, bounds, budget, optin={}, **optkwds):
             break
 
     return Result(fbest, xbest), objfunc.get_history()
-
+'''
 
 def snobfit(x, f, config, dx = None):
     ind = find(f[:,1] <= 0)
