@@ -174,18 +174,40 @@ def snobupdt(xl, xu, x, f, nsplit, small, near, d, np, t, xnew, fnew, fnan, u, v
 
         par1, ww, cdfx, dof = rsort(par)
         inew = numpy.concatenate((inew, par1), 0)
+        print(xl)
+        print(par1)
         for j in par1.astype(int):
+            print(j)
+            print(nxold)
             ind = find(par==j)
+            print(ind)
             ind = ind + nxold
+            print(ind)
             spl = numpy.append([j], ind.flatten())
+            print(spl)
+            print(x[spl])
+            print(f[spl])
+            print(xl[j])
+            print(xu[j])
+            print(nsplit[j])
             xl0, xu0, x0, f0, nsplit0, small0 = \
                 snobsplit(x[spl], f[spl], xl[j], xu[j], nsplit[j], u, v)
+            print("HALLO")
+            print(xl0)
+            print(x0)
             nxj = len(ind) + 1    # number of points in box [xl[j],xu[j]]
             k = find(numpy.sum(x0 == numpy.ones((nxj,1))*x[j,:], axis=1) == n)
+            print(k)
+            print(j)
+            print(xl)
+            print(xl0[k])
             xl[j] = xl0[k]
+            print(xl[j])
             xu[j] = xu0[k]
             nsplit[j] = nsplit0[k]
             small[j] = small0[k]
+            print(xl)
+            print(nxj)
             for k in range(nxj-1):
                 k1 = ind[k]
                 k2 = find(numpy.sum(x0 == numpy.ones((nxj,1))*x[k1,:],axis=1) == n)
