@@ -7,20 +7,20 @@ add_pkg = []
 requirements = []
 
 # optimizers sub-package requirements
-#requirements.append('SQCommon==0.3.1')
-#requirements.append('SQImFil==0.3.5')
-#requirements.append('SQSnobFit==0.4.3')
+requirements.append('SQCommon==0.3.1')
+requirements.append('SQImFil==0.3.5')
+requirements.append('SQSnobFit==0.4.3')
 
 # external optimizers
 requirements.append('Py-BOBYQA>=1.1')
 
 # rpy2 dependency for ORBIT
-#try:
-#    if sys.version_info[0] == 3 and \
-#           subprocess.check_output("R -q --no-save -e 'quit()'".split()):
-#        requirements.append('rpy2')
-#except Exception:
-#    pass
+try:
+    if sys.version_info[0] == 3 and \
+           subprocess.check_output("R -q --no-save -e 'quit()'".split()):
+        requirements.append('rpy2')
+except Exception:
+    pass
 
 here = os.path.abspath(os.path.dirname(__file__))
 with codecs.open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
