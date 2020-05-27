@@ -209,7 +209,7 @@ def rand(*args):
         res = numpy.zeros(args)
         for i in range(args[1]):
             res[:,i] = _randstate.rand(args[0])
-        print(RAND2)
+        print("RAND2")
         print(res)
         return res
     else:
