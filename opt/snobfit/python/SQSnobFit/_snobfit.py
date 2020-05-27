@@ -99,7 +99,7 @@ import numpy
 
 __all__ = ['minimize', 'log']
 
-#log = logging.getLogger('SKQ.SnobFit')
+log = logging.getLogger('SKQ.SnobFit')
 
 
 # dummy save/load (can always pickle but seems superflous; deal with this
