@@ -3,14 +3,19 @@
 Changelog
 =========
 
-master: 0.6.1
--------------
+2020-05-22: 0.7.0
+-----------------
 
-* Fix indexing error and double delete in NaN handling in SnobFit (Jan Rittig)
+* Added Qiskit interoperability interface
+* Added SciPy interoperability interface
+* Fixed a couple of logic flow bugs in SnobFit
+* Fix number of requests if nreq=1 (SnobFit; Jan Rittig)
+* Fix indexing error and double delete in NaN handling (SnobFit; Jan Rittig)
 
 
 2020-04-28: 0.6.0
 -----------------
 
 * Remove use of numpy.matrix in SQImFil
+* Bug fixes in SQCommon and SQSnobFit
 * Start of documentation

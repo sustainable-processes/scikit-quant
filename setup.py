@@ -8,7 +8,7 @@ requirements = []
 
 # optimizers sub-package requirements
 requirements.append('SQCommon==0.3.1')
-requirements.append('SQImFil==0.3.5')
+requirements.append('SQImFil==0.3.6')
 requirements.append('SQSnobFit==0.4.3')
 
 # external optimizers
@@ -85,5 +85,5 @@ setup(
     keywords='quantum computing optimizers',
 
     package_dir={'': '.'},
-    packages=find_packages('.', include=['skquant', 'skquant.opt']),
+    packages=find_packages('.', include=['skquant', 'skquant.opt', 'skquant.interop']),
 )

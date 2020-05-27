@@ -171,8 +171,8 @@ def minimize(f, x0, bounds, budget, optin={}, **optkwds):
 
     objfunc = ObjectiveFunction(f, options={'simple_function' : True})
 
-    minfcall = 10;      # minimum number of function values before
-                        # considering stopping
+    minfcall = len(bounds)*5      # minimum number of function values before
+                                  # considering stopping
 
   # calculate resolution vector from the bounds
     dx = (bounds[:,1]-bounds[:,0])*1E-5
@@ -185,14 +185,14 @@ def minimize(f, x0, bounds, budget, optin={}, **optkwds):
 
     config = {"bounds": bounds, "nreq": 2*len(bounds)+6, "p": .5}
     if optin is not None:
-        if options.maxmp is not None:
+        if options.maxmp is not None and 0 < options.maxmp:
             config["nreq"] = options.maxmp
 
     nstop = options.maxfail      # number of times no improvement is tolerated
 
     nparams = len(bounds)
 
-    if not len(x0):
+    if x0 is None or (type(x0) == numpy.ndarray and not x0.shape) or not len(x0):
       # initial call with empty list
         request, xbest, fbest = snobfit(numpy.array([]).reshape(0, len(bounds)),
             numpy.array([]).reshape(0, 2),
@@ -211,7 +211,9 @@ def minimize(f, x0, bounds, budget, optin={}, **optkwds):
 
     ncall0 = len(vals)                 # initial budget used
     fbestn, jbest = min_(vals[:,0])    # best function value
-    xbest = x[jbest,:]
+    if fbestn < fbest:
+        fbest = fbestn
+        xbest = x[jbest,:]
 
   # display current number of function values, best point and function value
     log.info('# calls = %d; xbest = %s; fbest = %f', ncall0, str(xbest), fbest)
@@ -513,6 +515,9 @@ def snobfit(x, f, config, dx = None):
 
     sreq = len(request)
     for l in isplit.flatten():
+        if sreq == nreq:
+            break
+
         jj = find(ind==l)
         ind = numpy.delete(ind, jj) #ind(jj) = []
         y1, f1 = snobpoint(x[l], xl[l], xu[l], f[l,0:2], g[l], sigma[l], u1, v1, dx)
@@ -522,10 +527,7 @@ def snobfit(x, f, config, dx = None):
                      numpy.max(numpy.abs(request[:,:n] - numpy.outer(numpy.ones(sreq), y1)) - \
                      numpy.outer(numpy.ones(sreq), dx), axis=1)) >= -numpy.spacing(1)):
             request = numpy.vstack((request, numpy.concatenate((y1, numpy.array((f1, 4), ndmin=2)), axis=1)))
-
         sreq = len(request)
-        if sreq == nreq:
-            break
 
     first = True
     while (sreq < nreq) and ind.size > 0:   # and find(small[ind] <= (minsmall + m1)).any():
