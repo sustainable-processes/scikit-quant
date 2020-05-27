@@ -123,7 +123,6 @@ config - use dictionary
     nreq - int
     probability p - float
 '''
-'''
 def snobfit_func(iter, x, func, config, dx, df):
     req = x
     f = numpy.zeros((len(x), 2))
