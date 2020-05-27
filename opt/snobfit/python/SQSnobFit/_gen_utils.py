@@ -203,13 +203,15 @@ def rand(*args):
 
     if len(args) == 1:
         print("RAND1")
-        print(_randstate.rand(*args))
-        return _randstate.rand(*args)
+        r = numpy.random.rand(1)
+        print(r)
+        return r
     elif len(args) == 2:
         res = numpy.zeros(args)
         for i in range(args[1]):
             res[:,i] = _randstate.rand(args[0])
         print("RAND2")
+        res = numpy.random.random_sample(args)
         print(res)
         return res
     else:
