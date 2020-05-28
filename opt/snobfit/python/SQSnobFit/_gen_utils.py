@@ -202,13 +202,14 @@ def rand(*args):
     """
 
     if len(args) == 1:
-        r = numpy.random.rand(1)
-        return r
+        #r = numpy.random.rand(1)
+        #return r
+        return return _randstate.rand(*args)
     elif len(args) == 2:
         res = numpy.zeros(args)
         for i in range(args[1]):
             res[:,i] = _randstate.rand(args[0])
-        res = numpy.random.random_sample(args)
+        #res = numpy.random.random_sample(args)
         return res
     else:
         # more dims not needed (yet); deal with it if we get there ...
