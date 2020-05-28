@@ -204,7 +204,7 @@ def rand(*args):
     if len(args) == 1:
         #r = numpy.random.rand(1)
         #return r
-        return return _randstate.rand(*args)
+        return _randstate.rand(*args)
     elif len(args) == 2:
         res = numpy.zeros(args)
         for i in range(args[1]):
